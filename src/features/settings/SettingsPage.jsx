@@ -7,102 +7,66 @@ import { Activity, Droplets, Fish, Settings2 } from "lucide-react";
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState({
-    batasKekeruhan: 2000,
-    durasiKuras: 5,
-    durasiIsi: 5,
-    durasiPakan: 3,
+    batasKekeruhan: 0,
+    durasiKuras: 0,
+    durasiIsi: 0,
+    durasiPakan: 0,
     pembersihanOtomatis: true,
   });
 
-  // 1. Ambil data dari Firebase secara realtime
+  // ARRAY INI ADALAH SUMBER KEBENARAN
+  const settingConfigs = [
+    { key: "batasKekeruhan", icon: Activity, title: "Batas Kekeruhan", subtitle: "Nilai ADC sensor", iconColorClass: "text-sky-400", focusColorClass: "focus:border-sky-500" },
+    { key: "durasiKuras", icon: Droplets, title: "Durasi Buang (detik)", subtitle: "Lama pompa buang nyala", iconColorClass: "text-amber-400", focusColorClass: "focus:border-amber-500" },
+    { key: "durasiIsi", icon: Droplets, title: "Durasi Isi (detik)", subtitle: "Lama pompa isi nyala", iconColorClass: "text-blue-400", focusColorClass: "focus:border-blue-500" },
+    { key: "durasiPakan", icon: Fish, title: "Durasi Pakan (detik)", subtitle: "Lama katup servo buka", iconColorClass: "text-orange-400", focusColorClass: "focus:border-orange-500" },
+  ];
+
   useEffect(() => {
     const settingsRef = ref(db, "aquarium/settings");
     const unsubscribe = onValue(settingsRef, (snapshot) => {
-      if (snapshot.exists()) {
-        setSettings(snapshot.val());
-      }
+      if (snapshot.exists()) setSettings(snapshot.val());
     });
     return () => unsubscribe();
   }, []);
 
-  // 2. Fungsi update state lokal (biar pas ngetik lancar, gak nge-lag nunggu server)
-  const handleLocalChange = (key, value) => {
-    setSettings((prev) => ({ ...prev, [key]: value }));
-  };
-
-  // 3. Fungsi tembak Firebase (dipanggil pas selesai ngetik ATAU pas klik toggle)
   const saveToFirebase = async (key, value) => {
-    setSettings((prev) => ({ ...prev, [key]: value }));
-    await set(ref(db, `aquarium/settings/${key}`), value);
+    try {
+      await set(ref(db, `aquarium/settings/${key}`), value);
+    } catch (error) {
+      console.error("Gagal simpan:", error);
+    }
   };
 
   return (
     <div className="w-full text-slate-100 pb-10">
       <PageHeader title="Settings" />
-
       <div className="px-6 mt-6 max-w-md mx-auto space-y-6 relative">
-        
-        {/* Parameter Perangkat */}
         <div className="flex items-center space-x-2">
           <span className="h-px w-4 bg-sky-500/50"></span>
-          <h2 className="text-[11px] font-bold tracking-widest text-sky-400 uppercase">
-            Parameter Perangkat
-          </h2>
+          <h2 className="text-[11px] font-bold tracking-widest text-sky-400 uppercase">Parameter Perangkat</h2>
         </div>
 
+        {/* INI DIV PEMBUNGKUSNYA */}
         <div className="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-4 space-y-2 divide-y divide-slate-800/50 backdrop-blur-md">
-          <SettingNumberRow
-            icon={Activity}
-            title="Batas Kekeruhan"
-            subtitle="Nilai ADC sensor"
-            value={settings.batasKekeruhan}
-            settingKey="batasKekeruhan"
-            iconColorClass="text-sky-400"
-            focusColorClass="focus:border-sky-500"
-            onChange={handleLocalChange}
-            onSave={saveToFirebase}
-          />
-          <SettingNumberRow
-            icon={Droplets}
-            title="Durasi Buang (detik)"
-            subtitle="Lama pompa buang nyala"
-            value={settings.durasiKuras}
-            settingKey="durasiKuras"
-            iconColorClass="text-amber-400"
-            focusColorClass="focus:border-amber-500"
-            onChange={handleLocalChange}
-            onSave={saveToFirebase}
-          />
-          <SettingNumberRow
-            icon={Droplets}
-            title="Durasi Isi (detik)"
-            subtitle="Lama pompa isi nyala"
-            value={settings.durasiIsi}
-            settingKey="durasiIsi"
-            iconColorClass="text-blue-400"
-            focusColorClass="focus:border-blue-500"
-            onChange={handleLocalChange}
-            onSave={saveToFirebase}
-          />
-          <SettingNumberRow
-            icon={Fish}
-            title="Durasi Pakan (detik)"
-            subtitle="Lama katup servo buka"
-            value={settings.durasiPakan}
-            settingKey="durasiPakan"
-            iconColorClass="text-orange-400"
-            focusColorClass="focus:border-orange-500"
-            onChange={handleLocalChange}
-            onSave={saveToFirebase}
-          />
+          {settingConfigs.map((cfg) => (
+            <SettingNumberRow
+              key={cfg.key}
+              icon={cfg.icon}
+              title={cfg.title}
+              subtitle={cfg.subtitle}
+              value={settings[cfg.key]}
+              settingKey={cfg.key}
+              iconColorClass={cfg.iconColorClass}
+              focusColorClass={cfg.focusColorClass}
+              onSave={saveToFirebase}
+            />
+          ))}
         </div>
 
-        {/* Sistem Automasi */}
         <div className="flex items-center space-x-2 pt-2">
           <span className="h-px w-4 bg-emerald-500/50"></span>
-          <h2 className="text-[11px] font-bold tracking-widest text-emerald-400 uppercase">
-            Sistem Automasi
-          </h2>
+          <h2 className="text-[11px] font-bold tracking-widest text-emerald-400 uppercase">Sistem Automasi</h2>
         </div>
 
         <div className="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-4 backdrop-blur-md">
@@ -112,23 +76,12 @@ export default function SettingsPage() {
                 <Settings2 className="w-4 h-4 text-emerald-400" />
               </div>
               <div className="space-y-0.5">
-                <p className="text-sm font-medium text-slate-200">
-                  Kuras Air Otomatis
-                </p>
-                <p className="text-[11px] text-slate-500">
-                  Berdasarkan sensor kekeruhan
-                </p>
+                <p className="text-sm font-medium text-slate-200">Kuras Air Otomatis</p>
+                <p className="text-[11px] text-slate-500">Berdasarkan sensor kekeruhan</p>
               </div>
             </div>
-
-            {/* Toggle pake saveToFirebase langsung karena action instan */}
             <button
-              onClick={() =>
-                saveToFirebase(
-                  "pembersihanOtomatis",
-                  !settings.pembersihanOtomatis,
-                )
-              }
+              onClick={() => saveToFirebase("pembersihanOtomatis", !settings.pembersihanOtomatis)}
               className="focus:outline-none transition-all active:scale-95"
             >
               {settings.pembersihanOtomatis ? (
@@ -145,7 +98,6 @@ export default function SettingsPage() {
             </button>
           </div>
         </div>
-
       </div>
     </div>
   );

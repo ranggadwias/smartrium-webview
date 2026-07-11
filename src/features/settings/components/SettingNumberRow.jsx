@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { Check, X } from "lucide-react"; // Tambah icon X
+
 export default function SettingNumberRow({
   icon: Icon,
   title,
@@ -6,9 +9,20 @@ export default function SettingNumberRow({
   settingKey,
   iconColorClass,
   focusColorClass,
-  onChange, // Buat ngetik lokal
-  onSave,   // Buat tembak DB pas beres
+  onSave,
 }) {
+  const [localVal, setLocalVal] = useState(value);
+  const isEdited = Number(localVal) !== Number(value);
+
+  const handleSave = () => {
+    const finalValue = localVal === "" ? 0 : Number(localVal);
+    onSave(settingKey, finalValue);
+  };
+
+  const handleCancel = () => {
+    setLocalVal(value); // Balikin ke nilai asli dari props
+  };
+
   return (
     <div className="flex items-center justify-between py-3">
       <div className="flex items-center space-x-3">
@@ -21,25 +35,34 @@ export default function SettingNumberRow({
         </div>
       </div>
       
-      <input
-        type="number"
-        min="0" // Cegah minus dari UI bawaan browser
-        value={value ?? ""}
-        onFocus={(e) => e.target.select()}
-        onChange={(e) => {
-          const val = e.target.value;
-          // Cegah user iseng ngetik minus manual
-          if (val !== "" && Number(val) < 0) return;
-          onChange(settingKey, val === "" ? "" : Number(val));
-        }}
-        onBlur={(e) => {
-          const val = e.target.value;
-          // Kalau pas ditinggal inputnya kosong atau minus, paksa jadi 0 dan tembak DB
-          const finalValue = val === "" || Number(val) < 0 ? 0 : Number(val);
-          onSave(settingKey, finalValue);
-        }}
-        className={`w-16 px-2 py-1.5 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-slate-950 border border-slate-800 rounded-xl text-slate-200 text-sm font-semibold focus:outline-none transition-colors ${focusColorClass}`}
-      />
+      <div className="flex items-center space-x-1">
+        <input
+          type="number"
+          min="0"
+          value={localVal}
+          onFocus={(e) => e.target.select()}
+          onChange={(e) => setLocalVal(e.target.value)}
+          className={`w-16 px-2 py-1.5 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-slate-950 border border-slate-800 rounded-xl text-slate-200 text-sm font-semibold focus:outline-none transition-colors ${focusColorClass}`}
+        />
+
+        {/* Kalau lagi diedit, munculin dua tombol: Save dan Cancel */}
+        {isEdited && (
+          <div className="flex items-center space-x-1">
+            <button 
+              onClick={handleCancel}
+              className="p-2 bg-red-500/10 text-red-400 rounded-xl hover:bg-red-500/20 transition-all active:scale-90"
+            >
+              <X className="w-4 h-4" />
+            </button>
+            <button 
+              onClick={handleSave}
+              className="p-2 bg-emerald-500/20 text-emerald-400 rounded-xl hover:bg-emerald-500/30 transition-all active:scale-90"
+            >
+              <Check className="w-4 h-4" />
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

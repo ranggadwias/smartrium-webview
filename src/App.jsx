@@ -55,7 +55,6 @@ export default function App() {
         return <NotificationPage setCurrentPage={setCurrentPage} />;
       case "history":
         return <HistoryPage />;
-      // --- INI YANG GUE TAMBAHIN BIAR KONEK ---
       case "settings":
         return <SettingsPage />; 
       // ----------------------------------------
