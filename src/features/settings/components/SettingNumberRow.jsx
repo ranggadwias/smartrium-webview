@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, X } from "lucide-react"; // Tambah icon X
+import { Check, X } from "lucide-react";
 
 export default function SettingNumberRow({
   icon: Icon,
@@ -12,6 +12,15 @@ export default function SettingNumberRow({
   onSave,
 }) {
   const [localVal, setLocalVal] = useState(value);
+  const [prevValue, setPrevValue] = useState(value); // Simpan state prop sebelumnya
+
+  // PENGGANTI useEffect (Standar resmi React terbaru)
+  // Kalau data dari Firebase (value) beda sama yang kita simpan, reset inputnya!
+  if (value !== prevValue) {
+    setPrevValue(value);
+    setLocalVal(value);
+  }
+
   const isEdited = Number(localVal) !== Number(value);
 
   const handleSave = () => {
@@ -20,7 +29,7 @@ export default function SettingNumberRow({
   };
 
   const handleCancel = () => {
-    setLocalVal(value); // Balikin ke nilai asli dari props
+    setLocalVal(value); 
   };
 
   return (
@@ -45,7 +54,6 @@ export default function SettingNumberRow({
           className={`w-16 px-2 py-1.5 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none bg-slate-950 border border-slate-800 rounded-xl text-slate-200 text-sm font-semibold focus:outline-none transition-colors ${focusColorClass}`}
         />
 
-        {/* Kalau lagi diedit, munculin dua tombol: Save dan Cancel */}
         {isEdited && (
           <div className="flex items-center space-x-1">
             <button 
