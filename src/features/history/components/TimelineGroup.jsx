@@ -1,4 +1,4 @@
-import TimeLine from "./TimeLine";
+import Timeline from "./Timeline";
 
 export default function TimelineGroup({ date, items }) {
   return (
@@ -12,7 +12,7 @@ export default function TimelineGroup({ date, items }) {
       
       <div className="pl-1 mt-3">
         {items.map((item, index) => (
-          <TimeLine 
+          <Timeline 
             key={item.id} 
             item={item} 
             isFirst={index === 0} // Tambah ini bang

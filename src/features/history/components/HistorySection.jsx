@@ -1,5 +1,5 @@
 import { ChevronRight } from "lucide-react";
-import TimeLine from "./TimeLine";
+import Timeline from "./Timeline";
 
 export default function HistorySection({ title, data, onSeeAll }) {
   // Ambil 2 data teratas aja buat preview di halaman utama
@@ -21,7 +21,7 @@ export default function HistorySection({ title, data, onSeeAll }) {
       <div className="space-y-1">
         {previewData.length > 0 ? (
           previewData.map((item, index) => (
-            <TimeLine 
+            <Timeline 
               key={item.id} 
               item={item} 
               isLast={index === previewData.length - 1} 
