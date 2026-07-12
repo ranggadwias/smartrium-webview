@@ -23,6 +23,16 @@ jobs:
 
       - run: npm ci
 
+      - name: Check Firebase Env
+        run: |
+          echo "PROJECT_ID length: ${#VITE_FIREBASE_PROJECT_ID}"
+          echo "DATABASE_URL length: ${#VITE_FIREBASE_DATABASE_URL}"
+          echo "API_KEY length: ${#VITE_FIREBASE_API_KEY}"
+        env:
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_FIREBASE_DATABASE_URL: ${{ secrets.VITE_FIREBASE_DATABASE_URL }}
+          VITE_FIREBASE_PROJECT_ID: ${{ secrets.VITE_FIREBASE_PROJECT_ID }}
+
       - name: Build Vite App
         run: npm run build
         env:
