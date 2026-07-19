@@ -42,7 +42,7 @@ export default function NotificationCard({ data, onClick }) {
           : 'bg-slate-900/40 border-slate-800/80 opacity-60 hover:opacity-80'
       }`}
     >
-      <div className="flex items-start space-x-4 flex-1 min-w-0 pr-8">
+      <div className="flex items-center space-x-4 flex-1 min-w-0 pr-8">
         <div className={`shrink-0 p-2.5 rounded-xl border ${config.bg} ${config.border} flex items-center justify-center`}>
           {config.icon}
         </div>

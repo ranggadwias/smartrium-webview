@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Check } from "lucide-react";
-import { ref, onValue, update } from "firebase/database";
+import { ref, onValue, update, query, limitToLast } from "firebase/database"; 
 import { db } from "../../config/firebase";
 import NotificationCard from "./components/NotificationCard";
 import PageHeader from "../../components/PageHeader";
@@ -16,9 +16,10 @@ export default function NotificationPage({ setCurrentPage }) {
   const [activeTab, setActiveTab] = useState("all");
   const [notifications, setNotifications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const firebasePath = "aquarium/notifications";
+  
+  // Path yang benar: di dalam node aquarium
+  const firebasePath = "aquarium/aquarium_notifications";
 
-  // Dictionary untuk teks Empty State (Hanya Title biar Clean)
   const emptyStateContent = {
     all: "Tidak Ada Notifikasi",
     feeding: "Tidak Ada Notifikasi Pakan",
@@ -27,8 +28,11 @@ export default function NotificationPage({ setCurrentPage }) {
   };
 
   useEffect(() => {
-    const notifRef = ref(db, firebasePath);
-    const unsubscribe = onValue(notifRef, (snapshot) => {
+    // FIX: Hapus kutip satu ('') di firebasePath biar jadi variabel
+    const notifRef = ref(db, firebasePath); 
+    const notifQuery = query(notifRef, limitToLast(50));
+
+    const unsubscribe = onValue(notifQuery, (snapshot) => {
       const data = snapshot.val();
       if (data) {
         const formattedData = Object.keys(data)
@@ -115,8 +119,6 @@ export default function NotificationPage({ setCurrentPage }) {
               </p>
             </div>
           ) : filteredNotifs.length === 0 ? (
-            
-            /* EMPTY STATE DINAMIS (TITLE ONLY) */
             <div className="flex flex-col items-center justify-center mt-24 text-center animate-fade-in-up">
               <div className="w-16 h-16 bg-slate-900/50 border border-slate-800/80 rounded-full flex items-center justify-center mb-4 shadow-inner">
                 <Check className="w-8 h-8 text-teal-500/40" />
@@ -125,7 +127,6 @@ export default function NotificationPage({ setCurrentPage }) {
                 {emptyStateContent[activeTab]}
               </p>
             </div>
-
           ) : (
             <div className="space-y-3">
               {filteredNotifs.map((notif) => (

@@ -6,11 +6,23 @@ export default function MainLayout({
   currentPage,
   setCurrentPage,
 }) {
+
   // REFACTOR: Hitung jumlah unread secara dinamis langsung dari props data aquarium
   const getUnreadCount = () => {
-    if (data?.notifications) {
-      return Object.values(data.notifications).filter(
-        (notif) => notif.isRead === false,
+    if (data?.aquarium_notifications) {
+      // 1. Ubah object jadi array
+      const notifsArray = Object.values(data.aquarium_notifications);
+
+      // 2. Urutkan berdasarkan waktu terbaru, lalu potong ambil 50 aja
+      // (Biar sinkron sama batas limit di NotificationPage)
+      const recentNotifs = notifsArray
+        .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0))
+        .slice(0, 50);
+
+      // 3. Hitung yang belum dibaca (pake !notif biar nangkep false, undefined, atau string "false")
+      return recentNotifs.filter(
+        (notif) =>
+          notif.isRead === false || notif.isRead === "false" || !notif.isRead,
       ).length;
     }
     return 0;

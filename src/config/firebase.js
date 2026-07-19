@@ -7,8 +7,6 @@ const firebaseConfig = {
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
 };
 
-console.log("FIREBASE CONFIG:", firebaseConfig);
-
 // Inisialisasi Firebase
 const app = initializeApp(firebaseConfig);
 
