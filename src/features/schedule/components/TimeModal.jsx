@@ -15,6 +15,7 @@ export default function TimeModal({
     <div className="fixed inset-0 z-100 flex items-end justify-center sm:items-center bg-slate-950/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
       <div className="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-6 relative shadow-2xl shadow-teal-500/10">
         
+        {/* HEADER MODAL */}
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center space-x-2 text-teal-400">
             <Clock className="w-5 h-5" />
@@ -30,25 +31,25 @@ export default function TimeModal({
           </button>
         </div>
         
-        <div className="flex justify-center mb-8 relative group">
+        {/* INPUT JAM (Fix Total: BISA DIKLIK DI PC & HP + PRESISI RATA TENGAH) */}
+        <div className="flex justify-center mb-8 relative group w-full">
           <div className="absolute inset-0 bg-teal-500/20 blur-2xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
-          
-          <div className="relative w-full">
-            
-            {/* 1. ICON LUCIDE BUATAN KITA */}
-            <div className="absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none text-teal-500/40 group-hover:text-teal-400 transition-colors z-10">
-              <Clock className="w-6 h-6" />
-            </div>
-
-            <input 
-              type="time" 
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              className="appearance-none block w-full bg-slate-950/80 border-2 border-slate-800 group-hover:border-teal-500/50 text-teal-400 text-5xl font-black text-center rounded-2xl py-6 focus:outline-none focus:border-teal-400 shadow-inner transition-all tracking-widest [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-datetime-edit]:flex [&::-webkit-datetime-edit]:justify-center"
-            />
-          </div>
+          <input 
+            type="time" 
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+            onClick={(e) => {
+              try {
+                e.target.showPicker?.();
+              } catch (err) {
+                console.log(err)
+              }
+            }}
+            className="w-full bg-slate-950/80 border-2 border-slate-800 group-hover:border-teal-500/50 text-teal-400 text-4xl sm:text-5xl font-black text-center rounded-2xl py-5 sm:py-6 px-2 focus:outline-none focus:border-teal-400 shadow-inner transition-all tracking-widest cursor-pointer appearance-none [&::-webkit-date-and-time-value]:text-center [&::-webkit-datetime-edit]:inline-flex [&::-webkit-datetime-edit]:justify-center [&::-webkit-datetime-edit]:w-full [&::-webkit-calendar-picker-indicator]:hidden"
+          />
         </div>
 
+        {/* TOMBOL ACTION */}
         <div className="flex space-x-3">
           <button 
             onClick={onClose}
