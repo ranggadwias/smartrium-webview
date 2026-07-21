@@ -31,14 +31,12 @@ export default function TimeModal({
           </button>
         </div>
         
-        {/* INPUT JAM (Di-hack biar icon bawaan browser ilang dan elegan) */}
         <div className="flex justify-center mb-8 relative group">
           <div className="absolute inset-0 bg-teal-500/20 blur-2xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
           <input 
             type="time" 
             value={time}
             onChange={(e) => setTime(e.target.value)}
-            // Trik sembunyiin icon jam bawaan browser dan styling ala digital clock
             className="relative bg-slate-950/80 border-2 border-slate-800 group-hover:border-teal-500/50 text-teal-400 text-5xl font-black text-center rounded-2xl py-6 px-8 focus:outline-none focus:border-teal-400 shadow-inner transition-all tracking-widest [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
           />
         </div>
