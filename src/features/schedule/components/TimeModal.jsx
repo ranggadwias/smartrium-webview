@@ -31,21 +31,14 @@ export default function TimeModal({
           </button>
         </div>
         
-        {/* INPUT JAM (Fix Total: BISA DIKLIK DI PC & HP + PRESISI RATA TENGAH) */}
+        {/* INPUT JAM (Asli kode lu, di-fix CSS penataannya biar responsif presisi) */}
         <div className="flex justify-center mb-8 relative group w-full">
           <div className="absolute inset-0 bg-teal-500/20 blur-2xl rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
           <input 
             type="time" 
             value={time}
             onChange={(e) => setTime(e.target.value)}
-            onClick={(e) => {
-              try {
-                e.target.showPicker?.();
-              } catch (err) {
-                console.log(err)
-              }
-            }}
-            className="w-full bg-slate-950/80 border-2 border-slate-800 group-hover:border-teal-500/50 text-teal-400 text-4xl sm:text-5xl font-black text-center rounded-2xl py-5 sm:py-6 px-2 focus:outline-none focus:border-teal-400 shadow-inner transition-all tracking-widest cursor-pointer appearance-none [&::-webkit-date-and-time-value]:text-center [&::-webkit-datetime-edit]:inline-flex [&::-webkit-datetime-edit]:justify-center [&::-webkit-datetime-edit]:w-full [&::-webkit-calendar-picker-indicator]:hidden"
+            className="w-full bg-slate-950/80 border-2 border-slate-800 group-hover:border-teal-500/50 text-teal-400 text-4xl sm:text-5xl font-black text-center rounded-2xl py-5 sm:py-6 px-2 focus:outline-none focus:border-teal-400 shadow-inner transition-all tracking-widest appearance-none [&::-webkit-date-and-time-value]:text-center [&::-webkit-datetime-edit]:inline-flex [&::-webkit-datetime-edit]:justify-center [&::-webkit-datetime-edit]:w-full [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
           />
         </div>
 
