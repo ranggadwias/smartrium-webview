@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ref, onValue } from "firebase/database";
-import { db } from "../../config/firebase"; // Sesuaikan path ini
+import { db } from "../../config/firebase"; 
 import HistorySection from "./components/HistorySection";
 import HistoryDetail from "./HistoryDetail";
 import PageHeader from "../../components/PageHeader";
@@ -11,25 +11,26 @@ export default function HistoryPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Path sesuai struktur DB lu (asumsi di aquarium/history)
     const historyRef = ref(db, "aquarium/history");
 
     const unsubscribe = onValue(historyRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        // Fungsi pembantu buat ubah object Firebase {id: {data}} jadi array [{id, data}]
-        const formatData = (obj) => {
+        const formatData = (obj, category) => {
           if (!obj) return [];
-          return Object.keys(obj).map((key) => ({
-            id: key,
-            ...obj[key],
-          })).sort((a, b) => b.timestamp - a.timestamp); // Sort berdasarkan waktu terbaru
+          return Object.keys(obj)
+            .map((key) => ({
+              id: key,
+              type: obj[key].type || category,
+              ...obj[key],
+            }))
+            .sort((a, b) => b.timestamp - a.timestamp);
         };
 
         setHistoryData({
-          feeding: formatData(data.feeding),
-          pump: formatData(data.pump),
-          alert: formatData(data.alert),
+          feeding: formatData(data.feeding, "feeding"),
+          pump: formatData(data.pump, "pump"),
+          alert: formatData(data.alert, "alert"),
         });
       }
       setIsLoading(false);
@@ -38,7 +39,6 @@ export default function HistoryPage() {
     return () => unsubscribe();
   }, []);
 
-  // Handler Navigasi
   if (activeView === 'feeding') {
     return <HistoryDetail title="Feeding History" data={historyData.feeding} onBack={() => setActiveView(null)} />;
   }

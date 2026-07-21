@@ -24,14 +24,15 @@ const HISTORY_CONFIG = {
 };
 
 export default function TimeLine({ item, isFirst, isLast }) {
-  const config = HISTORY_CONFIG[item.type] || HISTORY_CONFIG.default;
+  // Ambil type & ubah ke huruf kecil biar anti-miss
+  const itemType = (item?.type || "").toLowerCase();
+  const config = HISTORY_CONFIG[itemType] || HISTORY_CONFIG.default;
   const IconComponent = config.icon;
 
   return (
     <div className="relative flex items-stretch gap-4 mb-4 group">
       {/* SISI KIRI: KOLOM ICON & GARIS */}
       <div className="relative flex items-center justify-center w-10 shrink-0">
-        {/* LOGIKA GARIS TIMELINE */}
         {isFirst && !isLast && (
           <div className="absolute top-1/2 -bottom-4 w-0.5 bg-slate-800/60 left-1/2 -translate-x-1/2 z-0"></div>
         )}
@@ -49,22 +50,20 @@ export default function TimeLine({ item, isFirst, isLast }) {
         </div>
       </div>
 
-      {/* SISI KANAN: KOTAK KONTEN (CARD) - PAKE GRID BIAR LEBAR KONSISTEN */}
+      {/* SISI KANAN: KOTAK KONTEN (CARD) */}
       <div className="flex-1 grid grid-cols-[1fr,auto] gap-3 items-center bg-slate-900/60 border border-slate-800/80 rounded-2xl p-4 shadow-sm hover:border-slate-700 transition-colors min-h-18">
-        {/* KOLOM TEKS (1fr) */}
         <div className="min-w-0 flex flex-col justify-center">
           <p className="text-[10px] text-slate-500 font-black uppercase leading-none tracking-widest">
             {config.label}
           </p>
           <h4 className="text-[13px] font-semibold text-slate-200 mt-1.5 truncate leading-tight">
-            {item.title}
+            {item?.title || "-"}
           </h4>
         </div>
 
-        {/* KOLOM WAKTU (auto) - Selalu rata kanan karena grid-cols-[1fr,auto] */}
         <div className="text-right">
           <span className="text-xs font-black text-slate-400 tracking-wider">
-            {item.time}
+            {item?.time || "--:--"}
           </span>
         </div>
       </div>
