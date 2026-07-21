@@ -12,10 +12,8 @@ export default function SettingNumberRow({
   onSave,
 }) {
   const [localVal, setLocalVal] = useState(value);
-  const [prevValue, setPrevValue] = useState(value); // Simpan state prop sebelumnya
+  const [prevValue, setPrevValue] = useState(value); 
 
-  // PENGGANTI useEffect (Standar resmi React terbaru)
-  // Kalau data dari Firebase (value) beda sama yang kita simpan, reset inputnya!
   if (value !== prevValue) {
     setPrevValue(value);
     setLocalVal(value);

@@ -9,14 +9,14 @@ export default function TimelineGroup({ date, items }) {
           {date}
         </h3>
       </div>
-      
+
       <div className="pl-1 mt-3">
         {items.map((item, index) => (
-          <Timeline 
-            key={item.id} 
-            item={item} 
+          <Timeline
+            key={item.id}
+            item={item}
             isFirst={index === 0} // Tambah ini bang
-            isLast={index === items.length - 1} 
+            isLast={index === items.length - 1}
           />
         ))}
       </div>

@@ -23,10 +23,9 @@ const HISTORY_CONFIG = {
   },
 };
 
-export default function TimeLine({ item, isFirst, isLast }) {
-  // Ambil type & ubah ke huruf kecil biar anti-miss
-  const itemType = (item?.type || "").toLowerCase();
-  const config = HISTORY_CONFIG[itemType] || HISTORY_CONFIG.default;
+export default function Timeline({ item, isFirst, isLast }) {
+  const itemCategory = (item?.category || "").toLowerCase();
+  const config = HISTORY_CONFIG[itemCategory] || HISTORY_CONFIG.default;
   const IconComponent = config.icon;
 
   return (

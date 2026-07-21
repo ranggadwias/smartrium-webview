@@ -17,8 +17,8 @@ export default function NotificationPage({ setCurrentPage }) {
   const [notifications, setNotifications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   
-  // Path yang benar: di dalam node aquarium
-  const firebasePath = "aquarium/aquarium_notifications";
+  // ✅ PERBAIKAN: Path disesuaikan dengan node events yang baru dibuat di ESP32
+  const firebasePath = "aquarium/events/notifications";
 
   const emptyStateContent = {
     all: "Tidak Ada Notifikasi",
@@ -28,7 +28,6 @@ export default function NotificationPage({ setCurrentPage }) {
   };
 
   useEffect(() => {
-    // FIX: Hapus kutip satu ('') di firebasePath biar jadi variabel
     const notifRef = ref(db, firebasePath); 
     const notifQuery = query(notifRef, limitToLast(50));
 
@@ -71,7 +70,7 @@ export default function NotificationPage({ setCurrentPage }) {
   };
 
   const filteredNotifs = notifications.filter((notif) =>
-    activeTab === "all" ? true : notif.type === activeTab,
+    activeTab === "all" ? true : notif.category === activeTab,
   );
 
   return (

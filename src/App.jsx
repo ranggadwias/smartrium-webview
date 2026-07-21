@@ -57,7 +57,6 @@ export default function App() {
         return <HistoryPage />;
       case "settings":
         return <SettingsPage />; 
-      // ----------------------------------------
       default:
         return (
           <div className="p-10 flex flex-col items-center justify-center h-full text-slate-500">

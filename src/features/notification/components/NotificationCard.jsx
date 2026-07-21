@@ -1,6 +1,5 @@
 import { AlertTriangle, Check, Fan } from 'lucide-react';
 
-// FIX: Terima props onClick
 export default function NotificationCard({ data, onClick }) {
   const formatTime = (timestamp) => {
     const date = new Date(timestamp * 1000);
@@ -18,8 +17,8 @@ export default function NotificationCard({ data, onClick }) {
     return `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')} ${timeStr}`;
   };
 
-  const getIconConfig = (type) => {
-    switch (type) {
+  const getIconConfig = (category) => {
+    switch (category) {
       case 'alert':
         return { icon: <AlertTriangle className="w-5 h-5 text-rose-400" />, bg: 'bg-rose-500/10', border: 'border-rose-500/20' };
       case 'feeding':
@@ -31,11 +30,11 @@ export default function NotificationCard({ data, onClick }) {
     }
   };
 
-  const config = getIconConfig(data.type);
+  const config = getIconConfig(data.category);
 
   return (
     <div 
-      onClick={onClick} // FIX: Pasang event onClick di div utama
+      onClick={onClick}
       className={`relative flex items-center justify-between p-4 rounded-2xl border mb-3 backdrop-blur-xl transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.99] ${
         !data.isRead 
           ? 'bg-slate-800/60 border-teal-500/30 shadow-[0_0_15px_rgba(20,184,166,0.05)] hover:bg-slate-800/80' 
