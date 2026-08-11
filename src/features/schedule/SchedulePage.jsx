@@ -119,7 +119,7 @@ export default function SchedulePage({ data }) {
                 Belum ada jadwal pakan.
               </p>
               <p className="text-[11px] text-slate-500 mt-1">
-                Ikan lu masih nunggu disuapin manual.
+                Ikan anda menunggu diberi pakan.
               </p>
             </div>
           ) : (
@@ -171,7 +171,7 @@ export default function SchedulePage({ data }) {
               Nonaktifkan Jadwal?
             </h3>
             <p className="text-[11px] text-slate-400 mb-6 leading-relaxed">
-              Jadwal ini akan dimatikan. Ikan tidak akan dapet makan otomatis di
+              Jadwal ini akan dimatikan. Ikan tidak akan dapat makan otomatis di
               jam ini.
             </p>
             <div className="flex space-x-3">
