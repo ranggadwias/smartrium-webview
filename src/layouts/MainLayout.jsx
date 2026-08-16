@@ -34,7 +34,7 @@ export default function MainLayout({
       {currentPage === "dashboard" && (
         <header className="sticky top-0 z-50 w-full shrink-0 backdrop-blur-2xl bg-white/75 border-b border-white/80 shadow-xs px-6 h-20 flex justify-between items-center transition-all">
           <div>
-            <h1 className="text-xl font-black tracking-tight bg-linear-to from-sky-600 to-indigo-600 bg-clip-text text-transparent">
+            <h1 className="text-xl font-black tracking-tight bg-linear-to-r from-sky-600 to-indigo-600 bg-clip-text text-transparent">
               Smartrium
             </h1>
           </div>
