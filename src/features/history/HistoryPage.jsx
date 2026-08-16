@@ -71,11 +71,11 @@ export default function HistoryPage() {
   }
 
   return (
-    <div className="w-full text-slate-100 pb-10">
+    <div className="w-full text-slate-800 pb-10">
       <PageHeader title="History" />
 
       {isLoading ? (
-        <div className="px-6 mt-10 text-center text-slate-500 animate-pulse">
+        <div className="px-6 mt-10 text-center text-slate-400 animate-pulse">
           Memuat riwayat...
         </div>
       ) : (

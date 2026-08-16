@@ -24,8 +24,8 @@ export default function QuickAction({ data }) {
     <section className="space-y-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <span className="h-px w-4 bg-sky-500/50"></span>
-          <h2 className="text-xs font-bold tracking-widest text-sky-400 uppercase">
+          <span className="h-px w-4 bg-sky-400"></span>
+          <h2 className="text-xs font-bold tracking-widest text-sky-600 uppercase">
             Kontrol Manual
           </h2>
         </div>
@@ -36,12 +36,12 @@ export default function QuickAction({ data }) {
         <button
           onClick={() => handleCommand("aquarium/deviceState/isManualFeed", "pakan")}
           disabled={isFeeding}
-          className="flex flex-col items-center justify-center p-4 bg-slate-900/60 hover:bg-sky-500/10 border border-slate-800 disabled:opacity-30 disabled:hover:bg-slate-900/60 disabled:hover:border-slate-800 rounded-2xl transition-all duration-300 group active:scale-95 disabled:active:scale-100"
+          className="flex flex-col items-center justify-center p-4 bg-white/70 backdrop-blur-md hover:bg-sky-50/50 border border-white/80 disabled:opacity-40 disabled:hover:bg-white/70 rounded-2xl shadow-xs hover:shadow-sm hover:border-sky-200 transition-all duration-300 group active:scale-95 disabled:active:scale-100"
         >
-          <div className="p-3 bg-slate-800 group-hover:bg-sky-500/20 group-disabled:group-hover:bg-slate-800 rounded-xl text-slate-400 group-hover:text-sky-400 group-disabled:group-hover:text-slate-400 transition-colors mb-2">
-            <Fish className={`w-6 h-6 ${isFeeding ? "animate-bounce text-sky-400" : ""}`} />
+          <div className="p-3 bg-sky-100 group-hover:bg-sky-100 group-disabled:group-hover:bg-slate-100 rounded-xl text-sky-600 transition-colors mb-2">
+            <Fish className={`w-6 h-6 ${isFeeding ? "animate-bounce text-sky-600" : ""}`} />
           </div>
-          <span className="text-xs font-semibold text-slate-300 group-hover:text-sky-300 group-disabled:group-hover:text-slate-300 text-center whitespace-pre-line">
+          <span className="text-xs font-semibold text-slate-600 group-hover:text-sky-700 group-disabled:group-hover:text-slate-600 text-center transition-colors">
             {sending.pakan ? "Mengirim..." : data?.deviceState?.feedingStatus === "SEDANG MEMBERI" ? "Menyuapi..." : "Beri Pakan"}
           </span>
         </button>
@@ -50,12 +50,12 @@ export default function QuickAction({ data }) {
         <button
           onClick={() => handleCommand("aquarium/deviceState/isManualPump", "kuras")}
           disabled={isPumping}
-          className="flex flex-col items-center justify-center p-4 bg-slate-900/60 hover:bg-amber-500/10 border border-slate-800 disabled:opacity-30 disabled:hover:bg-slate-900/60 disabled:hover:border-slate-800 rounded-2xl transition-all duration-300 group active:scale-95 disabled:active:scale-100"
+          className="flex flex-col items-center justify-center p-4 bg-white/70 backdrop-blur-md hover:bg-amber-50/50 border border-white/80 disabled:opacity-40 disabled:hover:bg-white/70 rounded-2xl shadow-xs hover:shadow-sm hover:border-amber-200 transition-all duration-300 group active:scale-95 disabled:active:scale-100"
         >
-          <div className="p-3 bg-slate-800 group-hover:bg-amber-500/20 group-disabled:group-hover:bg-slate-800 rounded-xl text-slate-400 group-hover:text-amber-400 group-disabled:group-hover:text-slate-400 transition-colors mb-2">
-            <Fan className={`w-6 h-6 ${isPumping ? "animate-spin text-amber-400" : ""}`} />
+          <div className="p-3 bg-amber-100 group-hover:bg-amber-100 group-disabled:group-hover:bg-slate-100 rounded-xl text-amber-600 transition-colors mb-2">
+            <Fan className={`w-6 h-6 ${isPumping ? "animate-spin text-amber-600" : ""}`} />
           </div>
-          <span className="text-xs font-semibold text-slate-300 group-hover:text-amber-300 group-disabled:group-hover:text-slate-300 text-center whitespace-pre-line">
+          <span className="text-xs font-semibold text-slate-600 group-hover:text-amber-700 group-disabled:group-hover:text-slate-600 text-center transition-colors">
             {sending.kuras 
               ? "Mengirim..." 
               : data?.deviceState?.relay1 === true 

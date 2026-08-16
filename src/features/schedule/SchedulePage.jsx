@@ -88,14 +88,14 @@ export default function SchedulePage({ data }) {
   };
 
   return (
-    <div className="w-full text-slate-100 pb-10">
+    <div className="w-full text-slate-800 pb-10">
       <PageHeader title="Schedule" />
 
       <div className="px-6 mt-6 max-w-md mx-auto space-y-6 relative">
         {/* Toast Notifikasi */}
         {toastMsg && (
-          <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 flex items-center space-x-2 bg-emerald-950/90 border border-emerald-500/30 text-emerald-400 px-4 py-2.5 rounded-full shadow-xl backdrop-blur-md animate-fade-in-down">
-            <CheckCircle2 className="w-4 h-4 shrink-0" />
+          <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 flex items-center space-x-2 bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-2.5 rounded-full shadow-lg backdrop-blur-md animate-fade-in-down">
+            <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
             <span className="text-xs font-bold whitespace-nowrap">
               {toastMsg}
             </span>
@@ -104,8 +104,8 @@ export default function SchedulePage({ data }) {
 
         {/* Header List */}
         <div className="flex items-center space-x-2">
-          <span className="h-px w-4 bg-teal-500/50"></span>
-          <h2 className="text-[11px] font-bold tracking-widest text-teal-400 uppercase">
+          <span className="h-px w-4 bg-teal-500"></span>
+          <h2 className="text-[11px] font-bold tracking-widest text-teal-600 uppercase">
             Automasi Pakan
           </h2>
         </div>
@@ -113,12 +113,12 @@ export default function SchedulePage({ data }) {
         {/* List Jadwal */}
         <div className="space-y-4">
           {schedules.length === 0 ? (
-            <div className="text-center p-8 bg-slate-900/40 border border-slate-800/60 border-dashed rounded-2xl backdrop-blur-md">
-              <Clock className="w-8 h-8 text-slate-600 mx-auto mb-3" />
-              <p className="text-sm font-semibold text-slate-400">
+            <div className="text-center p-8 bg-white border border-slate-200 border-dashed rounded-2xl shadow-sm">
+              <Clock className="w-8 h-8 text-slate-400 mx-auto mb-3" />
+              <p className="text-sm font-semibold text-slate-700">
                 Belum ada jadwal pakan.
               </p>
-              <p className="text-[11px] text-slate-500 mt-1">
+              <p className="text-[11px] text-slate-400 mt-1">
                 Ikan anda menunggu diberi pakan.
               </p>
             </div>
@@ -139,9 +139,9 @@ export default function SchedulePage({ data }) {
         {schedules.length < 2 && (
           <button
             onClick={() => handleOpenModal(null)}
-            className="w-full flex items-center justify-center space-x-2 py-4 bg-slate-900/50 hover:bg-teal-500/10 border border-slate-700 hover:border-teal-500/40 border-dashed rounded-2xl text-slate-300 hover:text-teal-400 text-xs font-bold tracking-wide transition-all duration-300 group"
+            className="w-full flex items-center justify-center space-x-2 py-4 bg-white hover:bg-teal-50/50 border border-slate-200 hover:border-teal-200 border-dashed rounded-2xl text-slate-600 hover:text-teal-700 text-xs font-bold tracking-wide transition-all duration-300 group shadow-sm"
           >
-            <div className="p-1 bg-slate-800 group-hover:bg-teal-500/20 rounded-md transition-colors">
+            <div className="p-1 bg-slate-100 group-hover:bg-teal-100 text-slate-500 group-hover:text-teal-600 rounded-md transition-colors">
               <Plus className="w-4 h-4" />
             </div>
             <span>Tambah Jadwal ({2 - schedules.length} Tersisa)</span>
@@ -162,28 +162,28 @@ export default function SchedulePage({ data }) {
 
       {/* MODAL KONFIRMASI HAPUS */}
       {deleteTarget && (
-        <div className="fixed inset-0 z-110 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4 animate-in fade-in">
-          <div className="bg-slate-900 border border-slate-800 w-full max-w-xs rounded-3xl p-6 text-center shadow-2xl">
-            <div className="w-14 h-14 bg-rose-500/10 border border-rose-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <AlertTriangle className="w-6 h-6 text-rose-400" />
+        <div className="fixed inset-0 z-110 flex items-center justify-center bg-slate-900/25 backdrop-blur-xs p-4 animate-in fade-in">
+          <div className="bg-white border border-slate-200 w-full max-w-xs rounded-3xl p-6 text-center shadow-xl">
+            <div className="w-14 h-14 bg-rose-50 border border-rose-200 rounded-full flex items-center justify-center mx-auto mb-4">
+              <AlertTriangle className="w-6 h-6 text-rose-600" />
             </div>
-            <h3 className="text-base font-bold text-slate-100 mb-1">
+            <h3 className="text-base font-bold text-slate-800 mb-1">
               Nonaktifkan Jadwal?
             </h3>
-            <p className="text-[11px] text-slate-400 mb-6 leading-relaxed">
+            <p className="text-[11px] text-slate-500 mb-6 leading-relaxed">
               Jadwal ini akan dimatikan. Ikan tidak akan dapat makan otomatis di
               jam ini.
             </p>
             <div className="flex space-x-3">
               <button
                 onClick={() => setDeleteTarget(null)}
-                className="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition-colors"
+                className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-colors"
               >
                 Batal
               </button>
               <button
                 onClick={confirmDelete}
-                className="flex-1 py-3 bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold rounded-xl transition-colors shadow-lg shadow-rose-500/20"
+                className="flex-1 py-3 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl transition-colors shadow-sm"
               >
                 Ya, Matikan
               </button>

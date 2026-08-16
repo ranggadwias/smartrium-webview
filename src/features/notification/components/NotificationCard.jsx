@@ -20,13 +20,13 @@ export default function NotificationCard({ data, onClick }) {
   const getIconConfig = (category) => {
     switch (category) {
       case 'alert':
-        return { icon: <AlertTriangle className="w-5 h-5 text-rose-400" />, bg: 'bg-rose-500/10', border: 'border-rose-500/20' };
+        return { icon: <AlertTriangle className="w-5 h-5 text-rose-600" />, bg: 'bg-rose-50', border: 'border-rose-200' };
       case 'feeding':
-        return { icon: <Check className="w-5 h-5 text-emerald-400" />, bg: 'bg-emerald-500/10', border: 'border-emerald-500/20' };
+        return { icon: <Check className="w-5 h-5 text-emerald-600" />, bg: 'bg-emerald-50', border: 'border-emerald-200' };
       case 'pump':
-        return { icon: <Fan className="w-5 h-5 text-sky-400" />, bg: 'bg-sky-500/10', border: 'border-sky-500/20' };
+        return { icon: <Fan className="w-5 h-5 text-sky-600" />, bg: 'bg-sky-50', border: 'border-sky-200' };
       default:
-        return { icon: <Check className="w-5 h-5 text-slate-400" />, bg: 'bg-slate-800/50', border: 'border-slate-700' };
+        return { icon: <Check className="w-5 h-5 text-slate-500" />, bg: 'bg-slate-100', border: 'border-slate-200' };
     }
   };
 
@@ -35,10 +35,10 @@ export default function NotificationCard({ data, onClick }) {
   return (
     <div 
       onClick={onClick}
-      className={`relative flex items-center justify-between p-4 rounded-2xl border mb-3 backdrop-blur-xl transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.99] ${
+      className={`relative flex items-center justify-between p-4 rounded-2xl border mb-3 transition-all cursor-pointer hover:scale-[1.01] active:scale-[0.99] ${
         !data.isRead 
-          ? 'bg-slate-800/60 border-teal-500/30 shadow-[0_0_15px_rgba(20,184,166,0.05)] hover:bg-slate-800/80' 
-          : 'bg-slate-900/40 border-slate-800/80 opacity-60 hover:opacity-80'
+          ? 'bg-white border-teal-200 shadow-sm hover:border-teal-300' 
+          : 'bg-slate-50/70 border-slate-200 opacity-70 hover:opacity-100'
       }`}
     >
       <div className="flex items-center space-x-4 flex-1 min-w-0 pr-8">
@@ -47,22 +47,22 @@ export default function NotificationCard({ data, onClick }) {
         </div>
 
         <div className="flex-1 min-w-0">
-          <h3 className={`text-sm font-bold truncate pr-6 ${!data.isRead ? 'text-slate-200' : 'text-slate-400'}`}>
+          <h3 className={`text-sm font-bold truncate pr-6 ${!data.isRead ? 'text-slate-800' : 'text-slate-500'}`}>
             {data.title}
           </h3>
-          <p className={`text-xs mt-1 font-medium leading-relaxed wrap-break-word ${!data.isRead ? 'text-slate-400' : 'text-slate-500'}`}>
+          <p className={`text-xs mt-1 font-medium leading-relaxed ${!data.isRead ? 'text-slate-600' : 'text-slate-400'}`}>
             {data.message}
           </p>
         </div>
       </div>
 
       <div className="absolute top-4 right-4 flex flex-col items-end justify-between h-[calc(100%-2rem)]">
-        <span className={`text-[10px] font-semibold whitespace-nowrap ${!data.isRead ? 'text-teal-400' : 'text-slate-500'}`}>
+        <span className={`text-[10px] font-semibold whitespace-nowrap ${!data.isRead ? 'text-teal-600' : 'text-slate-400'}`}>
           {formatTime(data.timestamp)}
         </span>
         
         {!data.isRead && (
-          <span className="w-2 h-2 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.6)] mt-auto"></span>
+          <span className="w-2 h-2 rounded-full bg-rose-500 shadow-sm mt-auto"></span>
         )}
       </div>
     </div>

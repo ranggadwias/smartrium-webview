@@ -20,7 +20,7 @@ export default function SettingsPage() {
       icon: Activity,
       title: "Batas Kekeruhan",
       subtitle: "Nilai ADC sensor",
-      iconColorClass: "text-sky-400",
+      iconColorClass: "text-sky-600",
       focusColorClass: "focus:border-sky-500",
     },
     {
@@ -28,7 +28,7 @@ export default function SettingsPage() {
       icon: Droplets,
       title: "Durasi Buang (detik)",
       subtitle: "Lama pompa buang nyala",
-      iconColorClass: "text-amber-400",
+      iconColorClass: "text-amber-600",
       focusColorClass: "focus:border-amber-500",
     },
     {
@@ -36,7 +36,7 @@ export default function SettingsPage() {
       icon: Droplets,
       title: "Durasi Isi (detik)",
       subtitle: "Lama pompa isi nyala",
-      iconColorClass: "text-blue-400",
+      iconColorClass: "text-blue-600",
       focusColorClass: "focus:border-blue-500",
     },
     {
@@ -44,7 +44,7 @@ export default function SettingsPage() {
       icon: Fish,
       title: "Durasi Pakan (detik)",
       subtitle: "Lama katup servo buka",
-      iconColorClass: "text-orange-400",
+      iconColorClass: "text-orange-600",
       focusColorClass: "focus:border-orange-500",
     },
   ];
@@ -66,17 +66,17 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="w-full text-slate-100 pb-10">
+    <div className="w-full text-slate-800 pb-10">
       <PageHeader title="Settings" />
       <div className="px-6 mt-6 max-w-md mx-auto space-y-6 relative">
         <div className="flex items-center space-x-2">
-          <span className="h-px w-4 bg-sky-500/50"></span>
-          <h2 className="text-[11px] font-bold tracking-widest text-sky-400 uppercase">
+          <span className="h-px w-4 bg-teal-500"></span>
+          <h2 className="text-[11px] font-bold tracking-widest text-teal-600 uppercase">
             Parameter Perangkat
           </h2>
         </div>
 
-        <div className="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-4 space-y-2 divide-y divide-slate-800/50 backdrop-blur-md">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-2 divide-y divide-slate-100 shadow-sm">
           {settingConfigs.map((cfg) => (
             <SettingNumberRow
               key={cfg.key}
@@ -93,23 +93,23 @@ export default function SettingsPage() {
         </div>
 
         <div className="flex items-center space-x-2 pt-2">
-          <span className="h-px w-4 bg-emerald-500/50"></span>
-          <h2 className="text-[11px] font-bold tracking-widest text-emerald-400 uppercase">
+          <span className="h-px w-4 bg-teal-500"></span>
+          <h2 className="text-[11px] font-bold tracking-widest text-teal-600 uppercase">
             Sistem Automasi
           </h2>
         </div>
 
-        <div className="bg-slate-900/40 border border-slate-800/60 rounded-2xl p-4 backdrop-blur-md">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-slate-800/50 rounded-lg">
-                <Settings2 className="w-4 h-4 text-emerald-400" />
+              <div className="p-2.5 bg-slate-100 rounded-xl">
+                <Settings2 className="w-4 h-4 text-emerald-600" />
               </div>
               <div className="space-y-0.5">
-                <p className="text-sm font-medium text-slate-200">
+                <p className="text-sm font-semibold text-slate-800">
                   Kuras Air Otomatis
                 </p>
-                <p className="text-[11px] text-slate-500">
+                <p className="text-[11px] text-slate-400">
                   Berdasarkan sensor kekeruhan
                 </p>
               </div>
@@ -121,14 +121,14 @@ export default function SettingsPage() {
               className="focus:outline-none transition-all active:scale-95"
             >
               {settings.isAutoClean ? (
-                <div className="flex items-center space-x-1 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                <div className="flex items-center space-x-1.5 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-700 text-xs font-bold uppercase tracking-wider shadow-xs">
                   <span>ON</span>
-                  <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></div>
+                  <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
                 </div>
               ) : (
-                <div className="flex items-center space-x-1 px-3 py-1.5 bg-slate-800 border border-slate-700 rounded-xl text-slate-400 text-xs font-bold uppercase tracking-wider">
+                <div className="flex items-center space-x-1.5 px-3 py-1.5 bg-slate-100 border border-slate-200 rounded-xl text-slate-500 text-xs font-bold uppercase tracking-wider">
                   <span>OFF</span>
-                  <div className="w-2 h-2 rounded-full bg-slate-500"></div>
+                  <div className="w-2 h-2 rounded-full bg-slate-400"></div>
                 </div>
               )}
             </button>

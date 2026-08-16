@@ -22,113 +22,109 @@ export default function StatusSection({ data }) {
 
   return (
     <section className="space-y-4">
-      {/* INDIKATOR WAKTU */}
-      <div className="flex justify-between items-center border rounded-xl px-4 py-2.5 backdrop-blur-md transition-all duration-300 bg-slate-900/50 border-slate-800/80 text-slate-100">
-        <div className="flex items-center space-x-2">
-          <Clock className="w-4 h-4 text-sky-400" />
-          <span className="text-xs font-medium text-slate-400">Waktu Alat</span>
+      <div className="flex justify-between items-center border rounded-2xl px-4 py-3 transition-all duration-300 bg-white/70 backdrop-blur-md shadow-xs border-white/80 text-slate-800">
+        <div className="flex items-center space-x-2.5">
+          <div className="p-2 bg-sky-50 border border-sky-100 rounded-xl">
+            <Clock className="w-4 h-4 text-sky-600" />
+          </div>
+          <span className="text-xs font-medium text-slate-500">Waktu Alat</span>
         </div>
 
         <div className="flex items-center space-x-2">
-          <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
-          <span className="text-xs font-mono font-bold text-sky-400">
+          <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
+          <span className="text-xs font-mono font-bold text-sky-600">
             {data?.deviceState?.currentTime ?? "--:--:--"}
           </span>
         </div>
       </div>
 
-      {/* TITLE HEADLINE */}
       <div className="flex items-center space-x-2">
-        <span className="h-px w-4 bg-sky-500/50" />
-        <h2 className="text-xs font-bold tracking-widest text-sky-400 uppercase">
+        <span className="h-px w-4 bg-sky-400" />
+        <h2 className="text-xs font-bold tracking-widest text-sky-600 uppercase">
           Status Akuarium
         </h2>
       </div>
 
-      {/* GRID CARD PAKAN */}
       <div className="grid grid-cols-2 gap-4">
-        {/* CARD PAKAN 1 */}
         <div
-          className={`backdrop-blur-xl border rounded-2xl p-4 shadow-xl transition-all duration-300 ${
+          className={`border rounded-2xl p-4 transition-all duration-300 backdrop-blur-md ${
             isJadwal1Active
-              ? "bg-linear-to-br from-sky-500/10 to-blue-600/5 border-sky-500/20 shadow-sky-500/5"
-              : "bg-slate-900/40 border-slate-800/80"
+              ? "bg-linear-to from-sky-50/80 to-white/70 border-sky-200/80 shadow-xs shadow-sky-100/50"
+              : "bg-white/70 border-white/80 shadow-xs"
           }`}
         >
           <div className="flex justify-between items-start mb-3">
             <span
-              className={`p-2 rounded-xl transition-colors duration-300 ${isJadwal1Active ? "bg-sky-500/20 text-sky-300" : "bg-slate-800 text-slate-500"}`}
+              className={`p-2.5 rounded-xl transition-colors duration-300 ${isJadwal1Active ? "bg-sky-100 text-sky-600" : "bg-slate-100 text-slate-400"}`}
             >
               <Fish className="w-5 h-5" />
             </span>
 
             <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-medium transition-colors duration-300 ${isJadwal1Active ? "bg-sky-500/20 text-sky-300" : "bg-slate-800 text-slate-500"}`}
+              className={`text-[10px] px-2.5 py-0.5 rounded-full font-medium transition-colors duration-300 ${isJadwal1Active ? "bg-sky-100 text-sky-600" : "bg-slate-100 text-slate-400"}`}
             >
               {getSesiWaktu(data?.schedules?.schedule1)}
             </span>
           </div>
 
-          <p className="text-xs text-slate-400 font-medium">Pakan Pertama</p>
+          <p className="text-xs text-slate-500 font-medium">Pakan Pertama</p>
 
           <p
-            className={`text-2xl font-bold tracking-tight mt-1 transition-colors duration-300 ${isJadwal1Active ? "text-sky-300" : "text-slate-500"}`}
+            className={`text-2xl font-bold tracking-tight mt-1 transition-colors duration-300 ${isJadwal1Active ? "text-sky-600" : "text-slate-400"}`}
           >
             {formatTime(data?.schedules?.schedule1)}
           </p>
         </div>
 
-        {/* CARD PAKAN 2 */}
         <div
-          className={`backdrop-blur-xl border rounded-2xl p-4 shadow-xl transition-all duration-300 ${
+          className={`border rounded-2xl p-4 transition-all duration-300 backdrop-blur-md ${
             isJadwal2Active
-              ? "bg-linear-to-br from-amber-500/10 to-amber-600/5 border-amber-500/20 shadow-amber-500/5"
-              : "bg-slate-900/40 border-slate-800/80"
+              ? "bg-linear-to from-amber-50/80 to-white/70 border-amber-200/80 shadow-xs shadow-amber-100/50"
+              : "bg-white/70 border-white/80 shadow-xs"
           }`}
         >
           <div className="flex justify-between items-start mb-3">
             <span
-              className={`p-2 rounded-xl transition-colors duration-300 ${isJadwal2Active ? "bg-amber-500/20 text-amber-300" : "bg-slate-800 text-slate-500"}`}
+              className={`p-2.5 rounded-xl transition-colors duration-300 ${isJadwal2Active ? "bg-amber-100 text-amber-600" : "bg-slate-100 text-slate-400"}`}
             >
               <Fish className="w-5 h-5" />
             </span>
 
             <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-medium transition-colors duration-300 ${isJadwal2Active ? "bg-amber-500/20 text-amber-300" : "bg-slate-800 text-slate-500"}`}
+              className={`text-[10px] px-2.5 py-0.5 rounded-full font-medium transition-colors duration-300 ${isJadwal2Active ? "bg-amber-100 text-amber-600" : "bg-slate-100 text-slate-400"}`}
             >
               {getSesiWaktu(data?.schedules?.schedule2)}
             </span>
           </div>
 
-          <p className="text-xs text-slate-400 font-medium">Pakan Kedua</p>
+          <p className="text-xs text-slate-500 font-medium">Pakan Kedua</p>
 
           <p
-            className={`text-2xl font-bold tracking-tight mt-1 transition-colors duration-300 ${isJadwal2Active ? "text-amber-300" : "text-slate-500"}`}
+            className={`text-2xl font-bold tracking-tight mt-1 transition-colors duration-300 ${isJadwal2Active ? "text-amber-600" : "text-slate-400"}`}
           >
             {formatTime(data?.schedules?.schedule2)}
           </p>
         </div>
       </div>
 
-      {/* CARD STATUS KEKERUHAN */}
       <div
-        className={`backdrop-blur-xl border rounded-2xl p-4 flex items-center justify-between transition-all duration-300 ${
+        className={`border rounded-2xl p-4 flex items-center justify-between transition-all duration-300 backdrop-blur-md shadow-xs ${
           data?.deviceState?.turbidity
-            ? "bg-linear-to-r from-slate-900/90 to-sky-950/40 border-sky-500/20"
-            : "bg-slate-900/40 border-slate-800/80"
+            ? "bg-white/70 border-white/80"
+            : "bg-white/50 border-white/80"
         }`}
       >
         <div className="flex items-center space-x-3">
-          <div className="p-2.5 bg-sky-500/10 border border-sky-500/20 rounded-xl text-sky-400">
+          <div className="p-2.5 bg-sky-50 border border-sky-100 rounded-xl text-sky-600">
             <Droplet className="w-5 h-5" />
           </div>
 
           <div>
-            <p className="text-xs text-slate-400 font-medium">Kekeruhan Air</p>
+            <p className="text-xs text-slate-500 font-medium">Kekeruhan Air</p>
 
-            <div className="text-2xl font-extrabold text-sky-400 tracking-wide mt-0.5">
+            <div className="text-2xl font-extrabold text-sky-600 tracking-wide mt-0.5">
               {data?.deviceState?.turbidity ?? "---"}
-              <span className="text-xs font-normal text-slate-500 ml-1">
+              <span className="text-xs font-normal text-slate-400 ml-1">
                 ADC
               </span>
             </div>
@@ -138,11 +134,11 @@ export default function StatusSection({ data }) {
         <span
           className={`text-xs px-3 py-1 rounded-full font-semibold border transition-all duration-300 ${
             data?.deviceState?.waterStatus === "JERNIH"
-              ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+              ? "bg-emerald-50 text-emerald-600 border-emerald-200"
               : data?.deviceState?.waterStatus === "KOTOR " ||
-                  data?.deviceState?.waterStatus === "KERUH"
-                ? "bg-rose-500/10 text-rose-400 border-rose-500/20 animate-pulse"
-                : "bg-slate-800 text-slate-500 border-slate-700"
+                data?.deviceState?.waterStatus === "KERUH"
+              ? "bg-rose-50 text-rose-600 border-rose-200 animate-pulse"
+              : "bg-slate-100 text-slate-500 border-slate-200"
           }`}
         >
           {data?.deviceState?.waterStatus ?? "MEMUAT"}

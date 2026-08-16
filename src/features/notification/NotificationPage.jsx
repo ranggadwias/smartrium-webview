@@ -17,7 +17,6 @@ export default function NotificationPage({ setCurrentPage }) {
   const [notifications, setNotifications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   
-  // ✅ PERBAIKAN: Path disesuaikan dengan node events yang baru dibuat di ESP32
   const firebasePath = "aquarium/events/notifications";
 
   const emptyStateContent = {
@@ -74,7 +73,7 @@ export default function NotificationPage({ setCurrentPage }) {
   );
 
   return (
-    <div className="w-full text-slate-100 pb-10">
+    <div className="w-full text-slate-800 pb-10">
       <PageHeader
         title="Notifications"
         onBack={() => setCurrentPage("dashboard")}
@@ -90,8 +89,8 @@ export default function NotificationPage({ setCurrentPage }) {
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-300 border ${
                   activeTab === tab.id
-                    ? "bg-teal-500/20 text-teal-300 border-teal-500/30 shadow-lg shadow-teal-500/5"
-                    : "bg-slate-900/50 text-slate-400 border-slate-800/80 hover:bg-slate-800 hover:text-slate-300"
+                    ? "bg-teal-600 text-white border-teal-600 shadow-sm"
+                    : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:text-slate-800"
                 }`}
               >
                 {tab.label}
@@ -102,7 +101,7 @@ export default function NotificationPage({ setCurrentPage }) {
           {/* MARK ALL READ */}
           <button
             onClick={handleMarkAllAsRead}
-            className="text-[10px] font-bold text-teal-400 hover:text-teal-300 whitespace-nowrap ml-4 transition-colors"
+            className="text-[10px] font-bold text-teal-600 hover:text-teal-700 whitespace-nowrap ml-4 transition-colors"
           >
             Mark all read
           </button>
@@ -112,17 +111,17 @@ export default function NotificationPage({ setCurrentPage }) {
         <div className="mt-4">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center mt-20 opacity-50 animate-pulse">
-              <div className="w-8 h-8 border-4 border-teal-500/20 border-t-teal-500 rounded-full animate-spin mb-4"></div>
-              <p className="text-xs font-medium text-slate-400">
+              <div className="w-8 h-8 border-4 border-teal-200 border-t-teal-600 rounded-full animate-spin mb-4"></div>
+              <p className="text-xs font-medium text-slate-500">
                 Memuat riwayat...
               </p>
             </div>
           ) : filteredNotifs.length === 0 ? (
-            <div className="flex flex-col items-center justify-center mt-24 text-center animate-fade-in-up">
-              <div className="w-16 h-16 bg-slate-900/50 border border-slate-800/80 rounded-full flex items-center justify-center mb-4 shadow-inner">
-                <Check className="w-8 h-8 text-teal-500/40" />
+            <div className="flex flex-col items-center justify-center mt-24 text-center">
+              <div className="w-16 h-16 bg-white border border-slate-200 rounded-full flex items-center justify-center mb-4 shadow-sm">
+                <Check className="w-8 h-8 text-teal-600/40" />
               </div>
-              <p className="text-sm font-bold text-slate-300">
+              <p className="text-sm font-bold text-slate-700">
                 {emptyStateContent[activeTab]}
               </p>
             </div>

@@ -28,7 +28,7 @@ export default function App() {
       (error) => {
         console.error("Firebase Read Error: ", error);
         setLoading(false);
-      },
+      }
     );
 
     return () => unsubscribe();
@@ -36,11 +36,14 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center space-y-3">
-        <div className="w-10 h-10 border-4 border-sky-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-sm text-sky-400/70 font-medium animate-pulse">
-          Menghubungkan ke Akuarium...
-        </p>
+      <div className="min-h-screen flex flex-col items-center justify-center space-y-3 bg-slate-100/70 relative overflow-hidden">
+        <div className="absolute w-96 h-96 bg-sky-400/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="p-8 bg-white/80 backdrop-blur-2xl border border-white/95 rounded-3xl shadow-xl shadow-slate-200/50 flex flex-col items-center space-y-4 relative z-10">
+          <div className="w-10 h-10 border-4 border-sky-100 border-t-sky-600 rounded-full animate-spin"></div>
+          <p className="text-xs font-semibold text-slate-600 animate-pulse tracking-wide">
+            Menghubungkan ke Akuarium...
+          </p>
+        </div>
       </div>
     );
   }
@@ -56,7 +59,7 @@ export default function App() {
       case "history":
         return <HistoryPage />;
       case "settings":
-        return <SettingsPage />; 
+        return <SettingsPage />;
       default:
         return (
           <div className="p-10 flex flex-col items-center justify-center h-full text-slate-500">

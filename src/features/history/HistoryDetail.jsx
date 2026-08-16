@@ -9,7 +9,7 @@ export default function HistoryDetail({ title, data, onBack }) {
   }, {});
 
   return (
-    <div className="w-full text-slate-100 pb-10">
+    <div className="w-full text-slate-800 pb-10">
       <PageHeader title={title} onBack={onBack} />
 
       <div className="px-6 mt-6">
@@ -18,7 +18,7 @@ export default function HistoryDetail({ title, data, onBack }) {
             <TimelineGroup key={date} date={date} items={groupedData[date]} />
           ))
         ) : (
-          <div className="text-center mt-20 text-slate-500 text-sm">
+          <div className="text-center mt-20 text-slate-400 text-sm">
             Belum ada riwayat tercatat.
           </div>
         )}
