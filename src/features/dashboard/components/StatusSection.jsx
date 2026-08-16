@@ -49,7 +49,7 @@ export default function StatusSection({ data }) {
         <div
           className={`border rounded-2xl p-4 transition-all duration-300 backdrop-blur-md ${
             isJadwal1Active
-              ? "bg-linear-to from-sky-50/80 to-white/70 border-sky-200/80 shadow-xs shadow-sky-100/50"
+              ? "bg-linear-to-r from-sky-50/80 to-white/70 border-sky-200/80 shadow-xs shadow-sky-100/50"
               : "bg-white/70 border-white/80 shadow-xs"
           }`}
         >
@@ -79,7 +79,7 @@ export default function StatusSection({ data }) {
         <div
           className={`border rounded-2xl p-4 transition-all duration-300 backdrop-blur-md ${
             isJadwal2Active
-              ? "bg-linear-to from-amber-50/80 to-white/70 border-amber-200/80 shadow-xs shadow-amber-100/50"
+              ? "bg-linear-to-r from-amber-50/80 to-white/70 border-amber-200/80 shadow-xs shadow-amber-100/50"
               : "bg-white/70 border-white/80 shadow-xs"
           }`}
         >
